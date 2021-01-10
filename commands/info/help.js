@@ -5,7 +5,7 @@ const prefix = require("../../config.json").prefix;
 module.exports = {
   name: "help",
   aliases : ['h'],
-  description: "Shows all available bot commands.",
+  description: "Todos os Comandos Disponiveis.",
   run: async (client, message, args) => {
 
 
@@ -25,7 +25,7 @@ module.exports = {
         const cmds = commands.map((command) => {
           let file = require(`../../commands/${dir}/${command}`);
 
-          if (!file.name) return "No command name.";
+          if (!file.name) return "Comando sem Nome";
 
           let name = file.name.replace(".js", "");
 
@@ -43,13 +43,13 @@ module.exports = {
       });
 
       const embed = new MessageEmbed()
-        .setTitle("📬 Need help? Here are all of my commands:")
+        .setTitle("📬 Precisas de Ajuda? Estes são todos os comandos que tenho!")
         .addFields(categories)
         .setDescription(
-          `Use \`${prefix}help\` followed by a command name to get more additional information on a command. For example: \`${prefix}help ban\`.`
+          `Use \`${prefix}help\` Seguido por um nome de comando para obter mais informações adicionais sobre um comando. Por exemplo: \`${prefix}help ban\`.`
         )
         .setFooter(
-          `Requested by ${message.author.tag}`,
+          `Pedido por ${message.author.tag}`,
           message.author.displayAvatarURL({ dynamic: true })
         )
         .setTimestamp()
@@ -64,23 +64,23 @@ module.exports = {
 
       if (!command) {
         const embed = new MessageEmbed()
-          .setTitle(`Invalid command! Use \`${prefix}help\` for all of my commands!`)
+          .setTitle(`Comando inválido, usa \`${prefix}help\` Para veres a lista de todos os comandos!`)
           .setColor("FF0000");
         return message.channel.send(embed);
       }
 
       const embed = new MessageEmbed()
-        .setTitle("Command Details:")
+        .setTitle("Detalhes de Comando:")
         .addField("PREFIX:", `\`${prefix}\``)
         .addField(
           "COMMAND:",
-          command.name ? `\`${command.name}\`` : "No name for this command."
+          command.name ? `\`${command.name}\`` : "Comando sem nome"
         )
         .addField(
           "ALIASES:",
           command.aliases
             ? `\`${command.aliases.join("` `")}\``
-            : "No aliases for this command."
+            : "Sem apelido para este comando."
         )
         .addField(
           "USAGE:",
@@ -92,10 +92,10 @@ module.exports = {
           "DESCRIPTION:",
           command.description
             ? command.description
-            : "No description for this command."
+            : "Sem descrição para este comando."
         )
         .setFooter(
-          `Requested by ${message.author.tag}`,
+          `Pedido por ${message.author.tag}`,
           message.author.displayAvatarURL({ dynamic: true })
         )
         .setTimestamp()
