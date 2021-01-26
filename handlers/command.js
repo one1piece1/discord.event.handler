@@ -17,4 +17,19 @@ module.exports= (client) => {
         }
     });
     console.log(table.toString());
+    readdirSync("./eventos/").forEach((file) => {
+        const events = readdirSync("./eventos/").filter((file) =>
+          file.endsWith(".js")
+        );
+    
+        for (let file of events) {
+          let pull = require(`../eventos/${file}`);
+    
+          if (pull.name) {
+            client.events.set(pull.name, pull);
+          } else {
+            continue;
+          }
+        }
+      });
 }
