@@ -1,11 +1,13 @@
 const {Collection, Client, Discord} = require('discord.js')
 const fs = require('fs')
 const client = new Client({
-    disableEveryone: true
+    disableEveryone: true,
+    partials : ["MESSAGE", "CHANNEL", "REACTION"]});
 })
 const config = require('./config.json')
 const prefix = config.prefix
 const token = config.token
+module.exports = client;
 client.commands = new Collection();
 client.aliases = new Collection();
 client.categories = fs.readdirSync("./commands/");
